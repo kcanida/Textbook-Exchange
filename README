@@ -1,4 +1,38 @@
-This is your new Play 2.1 application
+This is your new Textbook Exchange project!
 =====================================
 
-This file will be packaged with your application, when using `play dist`.
+## Installing Play
+In order to setup the Textbook-Exchange project you first want to install the [Play Framework](http://www.playframework.com/documentation/2.0/Installing). 
+
+## Configuring Play for Eclipse
+The developers of Play made it easy to configure any Play project for IDE's such as Eclipse. Follow the steps to [configure](http://www.playframework.com/documentation/2.1.0/IDE) a play Project for Eclipse.
+
+## Downloading and importing the Textbook-Exchange Project into Eclipse
+Download and extract the Textbook-Exchange project into your play directory. You need to then import the project into Eclipse. To import the application into your Eclipse workspace go to **File/Import/General/Existing Project...** and choose the TextbookExchange folder you downloaded as the root directory.
+
+## Enabling EBean
+In order to enable EBean for the application, we uncommented the lines below in the application.conf file.
+* db.default.driver=org.h2.Driver
+* db.default.url="jdbc:h2:mem:play"
+* db.default.user=sa
+* db.default.password=""
+* ebean.default="models.*"
+
+Under Evolutions we also added the line:
+* applyEvolutions.default=true
+
+## Running the application in Play
+In order to run the application, we need to open a terminal/command line window.  Enter the directory where you installed Play.  Next, enter the TextbookExchange directory where you extracted the TextbookExchange project. Open the play console by typing the command $play.  Next, we can run the TextBookExchangeModelTest.java file by running the command $test.
+
+## Editing the application
+You can make changes to the entities in our application in Eclipse.  The 4 entity classes are held in the TextbookExchange>app>models package. Changes can also be made to out test class in TextbookExchangeModelTest.java file in the TextbookExchange>app>test package. Once changes are made, you can easily run your new test class by re-running the play console and test command. To exit the current play console from the command line simply type CTRL+D. 
+
+
+## About the TextbookExchange data model
+The TextbookExchange data model allows students of a university to offer and request textbooks from other students.  Each student can make multiple offers and requests if he or shes wishes.  Each instance of an offer/request can be associated with only one textbook and belong to a single student.
+
+4 entities:
+1. Student
+2. Book
+3. Offer
+4. Request
