@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import java.util.List;
 import models.Student;
@@ -14,6 +15,13 @@ import static play.test.Helpers.inMemoryDatabase;
 import static play.test.Helpers.start;
 import static play.test.Helpers.stop;
 
+/**
+ * 
+ * @author Kellie Canida
+ * 
+ * Model test for the Textbook Exchange data model.
+ *
+ */
 public class TextbookExchangeModelTest {
   private FakeApplication application;
   
@@ -31,13 +39,14 @@ public class TextbookExchangeModelTest {
   @Test
   public void testModel() {
     //Create 1 new book 
+    
     Book book = new Book("Hello World", 123456);
     book.edition = 2;
     book.newPrice = 100.50;
     
     //Create 1 new student
-    Student student = new Student("John", "john@hawaii.edu");
-    
+    Student student = new Student("John", "Doe", "john@hawaii.edu");
+
     //Create 1 new offer associated with the book and student
     Offer offer = new Offer(book, student);
     offer.condition = "good";
@@ -51,8 +60,7 @@ public class TextbookExchangeModelTest {
     request.desiredPrice = 50.00;
     student.requests.add(request);
     book.requests.add(request);
-    
-    
+       
     //Persist the sample model by saving all entities and relationships.
     student.save();
     book.save();
@@ -81,28 +89,29 @@ public class TextbookExchangeModelTest {
     assertEquals("Book-Request", books.get(0).requests.get(0), requests.get(0));
     assertEquals("Request-Book", requests.get(0).book, books.get(0));
     
-    
     //Some code to illustrate model manipulation with ORM
-    //Start in Java. Delete the tag from the (original) product instance.
+    //Start in Java. Delete the offer from the (original) student and book instance.
     student.offers.clear();
-    student.requests.clear();
-    book.offers.clear();
-    book.requests.clear();
-    //Persist the revised product instance.
-    student.save();
+    book.offers.clear();  
+    //Delete the student and book fields from the (original)offer.
+    offer.deleteStudent();
+    offer.deleteBook();
+    //Persist the revised student, book and offer instances.
+    student.save();    
     book.save();
+    offer.save();
     //FYI: this does not change our previously retrieved instance from the database.
     assertTrue("Previously retrieved student still has offers", !students.get(0).offers.isEmpty());
-    assertTrue("Previously retrieved student still has requests", !students.get(0).requests.isEmpty());
     assertTrue("Previously retrieved book still has offers", !books.get(0).offers.isEmpty());
-    assertTrue("Previously retrieved book still has requests", !books.get(0).requests.isEmpty());
-    //But of course it does change a freshly retrieved product instance.
-    //assertTrue("Fresh Student has no offer", Student.find().findList().get(0).offers.isEmpty());
-    //assertTrue("Fresh Student has no request", Student.find().findList().get(0).requests.isEmpty());
-    //We can now delete this Tag from the database if we want.
+    //But of course it does change a freshly retrieved student and book instance.
+    assertTrue("Fresh Student has no offer", Student.find().findList().get(0).offers.isEmpty());
+    assertTrue("Fresh Book has no offer", Book.find().findList().get(0).offers.isEmpty());
+    //Note: Freshly retrieved Offer does not point to any Student or Book.
+    assertNull("Fresh Offer has no student", Offer.find().findList().get(0).student);
+    assertNull("Fresh Offer has no book", Offer.find().findList().get(0).book);
+    //We can now delete this Offer from the database if we want.
     offer.delete();
-    request.delete();
+    offer.save();
     assertTrue("No more offers in database", Offer.find().findList().isEmpty());
-    assertTrue("No more requests in database", Request.find().findList().isEmpty());
   }
 }
