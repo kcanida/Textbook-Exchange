@@ -32,7 +32,8 @@ create table request (
 
 create table student (
   id                        bigint not null,
-  name                      varchar(255),
+  first_name                varchar(255),
+  last_name                 varchar(255),
   email                     varchar(255),
   constraint pk_student primary key (id))
 ;
