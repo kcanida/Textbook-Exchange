@@ -111,7 +111,6 @@ public class TextbookExchangeModelTest {
     assertNull("Fresh Offer has no book", Offer.find().findList().get(0).book);
     //We can now delete this Offer from the database if we want.
     offer.delete();
-    offer.save();
     assertTrue("No more offers in database", Offer.find().findList().isEmpty());
   }
 }
