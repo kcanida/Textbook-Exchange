@@ -40,7 +40,19 @@ public class Student extends Model{
     this.lastName = lastName;
     this.email = email;
   }
+  
+  public String getFirstName() {
+    return this.firstName;
+  }
 
+  public String getLastName() {
+    return this.lastName;
+  }
+  
+  public String getEmail() {
+    return this.email;
+  }
+  
   public static Finder<Long, Student> find() {
     return new Finder<Long, Student>(Long.class, Student.class);
   }

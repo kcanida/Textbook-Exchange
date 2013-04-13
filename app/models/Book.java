@@ -42,6 +42,18 @@ public class Book extends Model{
     this.isbn = isbn;
   }
 
+  public String getBookName() {
+    return this.name;
+  }
+  
+  public int getEdition() {
+    return this.edition;
+  }
+  
+  public double getNewPrice() {
+    return this.newPrice;
+  }
+  
   public static Finder<Long, Book> find() {
     return new Finder<Long, Book>(Long.class, Book.class);
   }
