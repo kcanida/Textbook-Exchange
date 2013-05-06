@@ -24,7 +24,7 @@ import play.db.ebean.Model;
 public class Book extends Model{
   private static final long serialVersionUID = -2658435387158619753L;
   @Id
-  private long primaryKey;
+  private Long primaryKey;
   @Required
   @Column(unique=true, nullable=false)
   private String bookId;
@@ -59,11 +59,11 @@ public class Book extends Model{
     return null;
   }
   
-  public long getPrimaryKey() {
+  public Long getPrimaryKey() {
     return this.primaryKey;
   }
   
-  public void setPrimaryKey(long primaryKey) {
+  public void setPrimaryKey(Long primaryKey) {
     this.primaryKey = primaryKey;
   }
   
@@ -81,6 +81,14 @@ public class Book extends Model{
   
   public void setName(String name) {
     this.name = name;
+  }
+  
+  public static List<String> getNames() {
+    List<String> bookNames = new ArrayList<>();
+    for (Book book : find().all()) {
+      bookNames.add(book.name);
+    }
+    return bookNames;
   }
   
   public int getEdition() {

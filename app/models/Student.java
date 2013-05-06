@@ -22,7 +22,7 @@ import play.db.ebean.Model;
 public class Student extends Model{
   private static final long serialVersionUID = -1729390609083717186L;
   @Id
-  private long primaryKey;
+  private Long primaryKey;
   @Required
   @Column(unique=true, nullable=false)
   private String studentId;
@@ -59,11 +59,11 @@ public class Student extends Model{
     return null;
   }
   
-  public long getPrimaryKey() {
+  public Long getPrimaryKey() {
     return this.primaryKey;
   }
   
-  public void setPrimaryKey(long primaryKey) {
+  public void setPrimaryKey(Long primaryKey) {
     this.primaryKey = primaryKey;
   }
   
@@ -81,6 +81,14 @@ public class Student extends Model{
 
   public void setFirstName(String firstName) {
     this.firstName = firstName;
+  }
+  
+  public static List<String> getNames() {
+    List<String> studentNames = new ArrayList<>();
+    for (Student student : find().all()) {
+      studentNames.add(student.getFirstName()+" "+student.getLastName());
+    }
+    return studentNames;
   }
   
   public String getLastName() {
