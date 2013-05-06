@@ -1,7 +1,27 @@
-@(message: String)
+@main("Textbook Xchange: Home") {
 
-@main("Welcome to Play 2.1") {
-    
-    @play20.welcome(message, style = "Java")
-    
+<div class="container">
+  <h2>Welcome to Textbook Xchange!</h2>
+  <h4>A web application for UH Manoa students to sell, buy, and request textbooks.</h4>
+  <br>
+  <h3>Get Started by Finding a TextBook:</h3>
+  <br>
+  <h4>ISBN (13-digit):</h4>
+  <form class="form-search">
+    <input type="text" class="search-query input-large">
+    <button type="submit" class="btn">Search</button>
+  </form>
+  <br>
+  <br>
+  <div class="container">
+    <h3>Popular Books</h3>
+    <div class="row">
+      <img src="http://covers.openlibrary.org/b/isbn/978-0521777681-M.jpg">
+      <div class="span4">
+        <img src="http://covers.openlibrary.org/b/isbn/978-0596007737-M.jpg"> 
+      </div>
+    </div>
+  </div>
+</div>
+
 }
