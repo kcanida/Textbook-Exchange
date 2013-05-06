@@ -22,7 +22,7 @@ import play.db.ebean.Model;
 public class Request extends Model {
   private static final long serialVersionUID = 7490409966063340450L;
   @Id
-  private long primaryKey;
+  private Long primaryKey;
   @Required
   @Column(unique=true, nullable=false)
   private String requestId;
@@ -49,6 +49,17 @@ public class Request extends Model {
   }
   
   /**
+   * For creating default values of requests
+   * @param requestId The default name.
+   * @param quantity The default quantity
+   */
+  public Request(String requestId, String desiredCondition, double desiredPrice) {
+    this.requestId = requestId;
+    this.desiredCondition = desiredCondition;
+    this.desiredPrice = desiredPrice;
+  }
+  
+  /**
    * Validation method used to validate data for the Form class and 
    * before saving a model to the database.
    * @return null if OK
@@ -71,11 +82,11 @@ public class Request extends Model {
     this.book = null;
   }
   
-  public long getPrimaryKey() {
+  public Long getPrimaryKey() {
     return this.primaryKey;
   }
   
-  public void setPrimaryKey(long primaryKey) {
+  public void setPrimaryKey(Long primaryKey) {
     this.primaryKey = primaryKey;
   }
   

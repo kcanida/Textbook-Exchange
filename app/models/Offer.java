@@ -20,7 +20,7 @@ import play.db.ebean.Model;
 public class Offer extends Model{
   private static final long serialVersionUID = 5326921134590534622L;
   @Id
-  private long primaryKey;
+  private Long primaryKey;
   @Required
   @Column(unique=true, nullable=false)
   private String offerId;
@@ -35,6 +35,7 @@ public class Offer extends Model{
   @ManyToOne(cascade=CascadeType.ALL, optional=true)
   private Book book;
 
+
   /**
    * Constructor method for an offer.
    * @param book that is being offered for sale.
@@ -44,6 +45,17 @@ public class Offer extends Model{
     this.offerId = offerId;
     this.book = book;
     this.student = student;
+    this.condition = condition;
+    this.targetPrice = targetPrice;
+  }
+  
+  /**
+   * For creating default values of offers
+   * @param offerId The default name.
+   * @param quantity The default quantity
+   */
+  public Offer(String offerId, String condition, double targetPrice) {
+    this.offerId= offerId;
     this.condition = condition;
     this.targetPrice = targetPrice;
   }
@@ -62,11 +74,11 @@ public class Offer extends Model{
     this.book = null;
   }
  
-  public long getPrimaryKey() {
+  public Long getPrimaryKey() {
     return this.primaryKey;
   }
   
-  public void setPrimaryKey(long primaryKey) {
+  public void setPrimaryKey(Long primaryKey) {
     this.primaryKey = primaryKey;
   }
   
