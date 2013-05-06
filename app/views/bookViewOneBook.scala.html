@@ -1,0 +1,123 @@
+@(book: models.Book, offers: List[models.Offer], requests: List[models.Request])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Textbook Xchange: View a book") {
+  
+  <div class="container">
+    <h2>The Elements of Java Style</h2>
+    <img src="http://covers.openlibrary.org/b/isbn/@book.getIsbn()-M.jpg">
+    <h4>ISBN (13-digit): @book.getIsbn()</h4>
+    <h4>Edition: @book.getEdition()</h4>
+  </div>
+
+  
+  <div class="container">
+    <h2>For Sale</h2>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th></th>
+          <th>price</th>
+          <th>condition</th>
+          <th>first Name</th>
+          <th>last Name</th>
+          <th>email</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+        @for(offer <- offers)  {
+          
+            <td>
+              <a class="btn btn-info btn-mini" href="@routes.Offer.edit(offer.getPrimaryKey())" role="button">Edit</a> 
+            </td>
+            <td>@offer.getTargetPrice()</td>
+            <td>@offer.getCondition()</td>
+            <td>@offer.getStudent.getFirstName()</td>
+            <td>@offer.getStudent.getLastName()</td>
+            <td>@offer.getStudent.getEmail()</td>
+            <td>
+              <a class="btn btn-primary" type="submit">Buy</a> 
+            </td>
+          
+        }
+        </tr>
+        <tr>
+            <td>
+              <a class="btn btn-info btn-mini" href="#edit" role="button">Edit</a> 
+            </td>
+            <td>$70.00</td>
+            <td>Like New</td>
+            <td>John</td>
+            <td>Smith</td>
+            <td>johnsmith.hawaii.edu</td>
+            <td>
+              <a class="btn btn-primary" type="submit">Buy</a>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <li>
+      <a class = "btn btn-success btn-large" href="@routes.Offer.create()" role="button">Make a New Offer</a>
+    </li>
+    
+    
+    <h2>Wanted</h2>
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th></th>
+          <th>desired price</th>
+          <th>desired condition</th>
+          <th>first Name</th>
+          <th>last Name</th>
+          <th>email</th>
+          <th>action</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr>
+          @for(request <- requests)  {
+            <td>
+              <a class="btn btn-info btn-mini" href="@routes.Request.edit(request.getPrimaryKey())" role="button">Edit</a> 
+            </td>
+            <td>@request.getDesiredPrice()</td>
+            <td>@request.getDesiredCondition()</td>
+            <td>@request.getStudent().getFirstName()</td>
+            <td>@request.getStudent().getLastName()</td>
+            <td>@request.getStudent().getEmail()</td>
+            <td>
+              <a class="btn btn-primary" type="submit">Fulfill Request</a> 
+            </td>
+          
+          }
+        </tr>
+         <tr>
+            <td>
+              <a class="btn btn-info btn-mini" href="#edit" role="button">Edit</a> 
+            </td>
+            <td>$50.00</td>
+            <td>Good</td>
+            <td>Jane</td>
+            <td>Doe</td>
+            <td>janedoe.hawaii.edu</td>
+            <td>
+              <a class="btn btn-primary" type="submit">Buy</a>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+    <br>
+    <br>
+    <li>
+      <a class = "btn btn-success btn-large" href="@routes.Request.create()" role="button">Make a New Request</a>
+    </li>
+  </div>
+</div>
+}

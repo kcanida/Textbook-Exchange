@@ -1,0 +1,29 @@
+@(primaryKey: Long, bookForm: Form[models.Book])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Textbook Xchange: Edit book") {
+  
+    <div class="container">
+      <h2>Edit the book</h2>
+      <br> 
+    </div>
+    <br>
+    <div class="container">
+      @form(routes.Book.update(primaryKey), 'class -> "form-horizontal") {
+        @inputText(bookForm("bookId"), '_label -> "Book ID")
+        @inputText(bookForm("isbn"), '_label -> "ISBN(13-digit)")
+        @inputText(bookForm("name"), '_label -> "Title")
+         @inputText(bookForm("edition"), '_label -> "Edition(optional)")
+        <div class="control-group">
+           <div class="controls">    
+            <input id="create"  type="submit" value="Create" class="btn btn-primary" href="@routes.Book.view()"> 
+            <a href="@routes.Book.view()" class="btn">Cancel</a> 
+          </div>
+        </div>
+      }
+      </div>
+    </div>
+  
+}

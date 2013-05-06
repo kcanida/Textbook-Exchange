@@ -1,0 +1,26 @@
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Textbook Xchange: Login") {
+
+    <div class="container">
+    <div class="content">
+      <div class="row">
+        <div class="login-form">
+          <h2>Textbook Xchange Login</h2>
+          <form action="">
+            <fieldset>
+              <div class="clearfix">
+                <input type="text" placeholder="UH Manoa email">
+              </div>
+              <div class="clearfix">
+                <input type="password" placeholder="Password">
+              </div>
+              <button class="btn primary" type="submit">Sign in</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+}

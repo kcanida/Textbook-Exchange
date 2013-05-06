@@ -1,0 +1,58 @@
+@(studentForm: Form[models.Student], students: List[models.Student])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("TextbookExchange: Create Student") {
+
+  <div class="container">
+    <h2>Create a new Textbook Xchange account to</h2>
+    <h2>begin selling and buying textbooks.</h2>
+    <br> 
+  </div>
+  <br>
+  <div class="container">
+    @form(routes.Student.save(), 'class -> "form-horizontal") {
+      @inputText(studentForm("studentId"), '_label -> "Student ID")
+      <h6>(Pick a unique ID not being used. Check with table below of taken Student ID's)</h6>
+      @inputText(studentForm("firstName"), '_label -> "First Name")
+      @inputText(studentForm("lastName"), '_label -> "Last Name")
+      @inputText(studentForm("email"), '_label -> "UH Manoa email")
+      <div class="control-group">
+        <div class="controls">    
+          <input id="create"  type="submit" value="Create" class="btn btn-primary"> 
+          <a href="@routes.Book.view()" class="btn">Cancel</a> 
+        </div>
+      </div>
+    }
+  
+    <h3>List of current users in Textbook Xchange database:</h3>
+    <div class="scrolling-table">
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Student's Name</th>
+            <th>Email</th>
+            <th>Student Id</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for(student <- students) {
+            <tr>
+              <td>
+                <a href="@routes.Student.edit(student.getPrimaryKey())">@student.getFirstName() @student.getLastName()</a>
+              </td>
+              <td>
+                @student.getEmail()
+              </td>
+              <td>
+                @student.getStudentId()
+              </td>
+            </tr>
+          }
+        </tbody>
+     </table>
+    </div>
+  </div>
+
+  }

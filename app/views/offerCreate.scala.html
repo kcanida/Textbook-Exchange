@@ -1,0 +1,41 @@
+@(offerForm: Form[models.Offer], offers: List[models.Offer])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Textbook Xchange: Make a new offer") {
+
+  <div class="container">
+    @form(routes.Offer.create(), 'class -> "form-horizontal") {
+      @inputText(offerForm("offerId"), '_label -> "Offer ID")
+      <h6>(Pick a unique ID not being used. Check with table below of taken Offer ID's)</h6>
+      @inputText(offerForm("condition"), '_label -> "Condition")
+      @inputText(offerForm("targetPrice"), '_label -> "Selling Price")
+      @select(offerForm("bookName"), options = options(models.Book.getNames()), '_default -> "Choose a book", '_label -> "Book")
+      @select(offerForm("studentName"), options = options(models.Student.getNames()), '_default -> "Choose a student", '_label -> "Student")
+      <div class="control-group">
+        <div class="controls">    
+          <input id="create"  type="submit" value="Create" class="btn btn-primary"> 
+          <a href="@routes.Book.view()" class="btn">Cancel</a> 
+        </div>
+      </div>
+    }  
+  
+    <h3>List of current offers in Textbook Xchange database:</h3>
+    <div class="scrolling-table">
+      <table class="table table-condensed">
+        <tbody>
+           @for(offer <- offers) {
+            <tr><td><a href="@routes.Offer.edit(offer.getPrimaryKey())">@offer.getTargetPrice() @offer.getCondition(), @offer.getStudent().getFirstName() @offer.getStudent().getLastName() @offer.getStudent().getEmail() (@offer.getOfferId())</a></td></tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+  
+  
+  
+
+}

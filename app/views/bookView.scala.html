@@ -1,0 +1,59 @@
+@(books: List[models.Book])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Textbook Xchange: View all books") {
+    
+    <div class="container">
+      <h3>What TextBook would you l ike to sell or buy?</h3>
+      <h4>Search through the table below or in the ISBN search field in the navigation bar</h4>
+      <br>
+      <br>
+      <div class="scrolling-table">
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>ISBN</th>
+                <th>Edition</th>
+                <th>Book Id</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for(book <- books) {
+                <tr>
+                  <td>
+                    <img src="http://covers.openlibrary.org/b/isbn/@book.getIsbn()-S.jpg">
+                  </td>
+                  <td> 
+                    <a href="@routes.Book.viewOneBook(book.getPrimaryKey())">@book.getName()</a>
+                  </td>
+                  <td>
+                    @book.getIsbn()
+                  </td>
+                  <td>
+                    @book.getEdition()
+                  </td>
+                  <td>
+                    @book.getBookId()
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <h3>If you do not see the book you would like to sell above, </h3>
+      <h3>add the book to the system by clicking the button below</h3>
+      <li>
+        <a class = "btn btn-success btn-large" href="@routes.Book.create()" role="button">Add a new Book</a>
+      </li>
+    </div>
+      
+}

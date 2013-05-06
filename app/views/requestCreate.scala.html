@@ -1,0 +1,23 @@
+@(requestForm: Form[models.Request])
+
+@import helper._
+@implicitFieldConstructor = @{ FieldConstructor(twitterBootstrapInput.render) } 
+
+@main("Textbook Xchange: Create Request") {
+    <div class="container">
+    @form(routes.Request.create(), 'class -> "form-horizontal") {
+      @inputText(requestForm("requestId"), '_label -> "Request ID")
+      <h6>(Pick a unique ID not being used. Check with table below of taken Request ID's)</h6>
+      @inputText(requestForm("desiredCondition"), '_label -> "Desired Condition")
+      @inputText(requestForm("desiredPrice"), '_label -> "Desired Price")
+      @select(requestForm("book"), options = options(models.Book.getNames()), '_default -> "Choose a book", '_label -> "Book")
+      @select(requestForm("student"), options = options(models.Student.getNames()), '_default -> "Choose a student", '_label -> "Student")
+      <div class="control-group">
+        <div class="controls">    
+          <input id="create"  type="submit" value="Create" class="btn btn-primary"> 
+          <a href="@routes.Book.view()" class="btn">Cancel</a> 
+        </div>
+      </div>
+    }  
+  </div>
+}
