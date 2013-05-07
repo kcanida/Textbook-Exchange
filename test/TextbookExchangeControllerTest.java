@@ -69,7 +69,7 @@ public class TextbookExchangeControllerTest {
     studentData.put("email", "janecrow@hawaii.edu");
     FakeRequest request = fakeRequest();
     request.withFormUrlEncodedBody(studentData);
-    result = callAction(controllers.routes.ref.Student.newStudent(), request);
+    result = callAction(controllers.routes.ref.Student.create(), request);
     assertEquals("Create a new student", OK, status(result));
     
     //Test POST /students (with simulated, invalid form data).
@@ -78,11 +78,11 @@ public class TextbookExchangeControllerTest {
     assertEquals("Create bad student fails", BAD_REQUEST, status(result));
   
     //Test DELETE /students/Student-01 (a valid StudentId).
-    result = callAction(controllers.routes.ref.Student.delete(studentId));
+    result = callAction(controllers.routes.ref.Student.deleteTest(studentId));
     assertEquals("Delete current student OK", OK, status(result));
     result = callAction(controllers.routes.ref.Student.details(studentId));
     assertEquals("Deleted student gone", NOT_FOUND, status(result));
-    result = callAction(controllers.routes.ref.Student.delete(studentId));
+    result = callAction(controllers.routes.ref.Student.deleteTest(studentId));
     assertEquals("Delete missing stuent also OK", OK, status(result));
   }
   
@@ -123,11 +123,11 @@ public class TextbookExchangeControllerTest {
     assertEquals("Create bad book fails", BAD_REQUEST, status(result));
   
     //Test DELETE /students/Student-01 (a valid StudentId).
-    result = callAction(controllers.routes.ref.Book.delete(bookId));
+    result = callAction(controllers.routes.ref.Book.deleteTest(bookId));
     assertEquals("Delete current book OK", OK, status(result));
     result = callAction(controllers.routes.ref.Book.details(bookId));
     assertEquals("Deleted book gone", NOT_FOUND, status(result));
-    result = callAction(controllers.routes.ref.Book.delete(bookId));
+    result = callAction(controllers.routes.ref.Book.deleteTest(bookId));
     assertEquals("Delete missing book also OK", OK, status(result));
   }
   
@@ -182,11 +182,11 @@ public class TextbookExchangeControllerTest {
     assertEquals("Create bad offer fails", BAD_REQUEST, status(result));
   
     //Test DELETE /offers/Offer-01 (a valid OfferId).
-    result = callAction(controllers.routes.ref.Offer.delete(offerId));
+    result = callAction(controllers.routes.ref.Offer.deleteTest(offerId));
     assertEquals("Delete current offer OK", OK, status(result));
     result = callAction(controllers.routes.ref.Offer.details(offerId));
     assertEquals("Deleted offer gone", NOT_FOUND, status(result));
-    result = callAction(controllers.routes.ref.Offer.delete(offerId));
+    result = callAction(controllers.routes.ref.Offer.deleteTest(offerId));
     assertEquals("Delete missing offer also OK", OK, status(result));
   }
   
@@ -241,11 +241,12 @@ public class TextbookExchangeControllerTest {
     assertEquals("Create bad request fails", BAD_REQUEST, status(result));
   
     //Test DELETE /requests/Request-01 (a valid RequestId).
-    result = callAction(controllers.routes.ref.Request.delete(requestId));
+    result = callAction(controllers.routes.ref.Request.deleteTest(requestId));
     assertEquals("Delete current request OK", OK, status(result));
     result = callAction(controllers.routes.ref.Request.details(requestId));
     assertEquals("Deleted request gone", NOT_FOUND, status(result));
-    result = callAction(controllers.routes.ref.Request.delete(requestId));
+    result = callAction(controllers.routes.ref.Request.deleteTest(requestId));
     assertEquals("Delete missing request also OK", OK, status(result));
   }
+  
 }
