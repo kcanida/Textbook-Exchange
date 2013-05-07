@@ -94,6 +94,11 @@ public class Book extends Controller {
     return ok(bookViewOneBook.render(book, offers, requests));
   }
   
+  public static Result index() {
+    List<models.Book> books = models.Book.find().findList();
+    return ok(books.isEmpty() ? "No books" : books.toString());
+  }
+  
   public static Result details(String bookId) {
     models.Book book = models.Book.find().where().eq("bookId",bookId).findUnique();
     return (book==null) ? notFound("No book found") : ok(book.toString());
@@ -111,13 +116,13 @@ public class Book extends Controller {
     book.save();
     return ok(book.toString());
   }
-/*
-  public static Result delete(String bookId) {
+
+  public static Result deleteTest(String bookId) {
     models.Book book = models.Book.find().where().eq("bookId", bookId).findUnique();
     if(book != null) {
       book.delete();
     }
     return ok();
-  }*/
+  }
 
 }

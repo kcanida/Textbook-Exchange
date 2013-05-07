@@ -2,8 +2,6 @@ package controllers;
 
 import static play.data.Form.form;
 import java.util.List;
-import models.Book;
-import models.Student;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -93,14 +91,14 @@ public class Request extends Controller {
     request.save();
     return ok(request.toString());
   }
-/*
-  public static Result delete(String requestId) {
+
+  public static Result deleteTest(String requestId) {
     models.Request request = models.Request.find().where().eq("requestId", requestId).findUnique();
     if(request != null) {
       request.delete();
     }
     return ok();
-  }*/
+  }
 
 
 }

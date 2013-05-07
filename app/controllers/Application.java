@@ -1,6 +1,5 @@
 package controllers;
 
-import java.util.List;
 import play.mvc.*;
 
 import views.html.*;

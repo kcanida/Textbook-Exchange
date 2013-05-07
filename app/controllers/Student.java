@@ -5,7 +5,6 @@ import java.util.List;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.bookView;
 import views.html.studentCreate;
 import views.html.studentEdit;
 
@@ -97,13 +96,13 @@ public class Student extends Controller {
     student.save();
     return ok(student.toString());
   }
-/*
-  public static Result delete(String studentId) {
+
+  public static Result deleteTest(String studentId) {
     models.Student student = models.Student.find().where().eq("studentId", studentId).findUnique();
     if(student != null) {
       student.delete();
     }
     return ok();
-  }*/
+  }
 
 }

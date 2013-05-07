@@ -7,8 +7,6 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.offerCreate;
 import views.html.offerEdit;
-import models.Book;
-import models.Student;
 
 public class Offer extends Controller {
 
@@ -97,7 +95,13 @@ public class Offer extends Controller {
     
   }
 
-
+  public static Result deleteTest(String offerId) {
+    models.Offer offer = models.Offer.find().where().eq("offerId", offerId).findUnique();
+    if(offer != null) {
+      offer.delete();
+    }
+    return ok();
+  }
 
 
 }
